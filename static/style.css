@@ -1,0 +1,58 @@
+/* Styling for selected toggle button */
+.toggleSelected {
+    background-color: #337ab7;
+    color: #ffffff;
+}
+
+/* Styling for textarea */
+textarea {
+    font-family: monospace;
+}
+
+/* Styling for h4 inside .cardContent */
+.cardContent h4 {
+    margin-top: 0;
+}
+
+/* Styling for aligning container */
+.alignContainer {
+    display: table;
+    width: 100%;
+}
+
+/* Styling for vertical alignment */
+.alignMiddle {
+    height: 20em;
+    display: table-cell;
+    vertical-align: middle;
+}
+
+/* Hide .cardBack initially */
+.cardBack {
+    display: none;
+}
+
+/* Styling for larger text */
+.largerText {
+    font-size: 2em;
+}
+
+/* Disable collapsing header menu */
+.navbar-collapse.collapse {
+  display: block!important;
+}
+
+/* Float navbar items left */
+.navbar-nav>li, .navbar-nav {
+  float: left !important;
+}
+
+/* Adjust margin for last navbar item */
+.navbar-nav.navbar-right:last-child {
+  margin-right: 0 !important;
+}
+
+/* Float navbar items right */
+.navbar-right {
+  float: right!important;
+}

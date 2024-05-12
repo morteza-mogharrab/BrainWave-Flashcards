@@ -1,0 +1,87 @@
+{% extends "layout.html" %}  <!-- Extending the base layout -->
+
+{% block body %}  <!-- Beginning of body block -->
+
+    <!-- Form to insert a new card -->
+    <div class="well editPanel">
+        <h2>Insert a New Card</h2>
+        <form action="{{ url_for('add_card') }}" method="post" class="cardForm">
+            <div class="form-group">
+                <!-- Radio buttons for card type selection -->
+                <label for="general" class="toggleButton btn btn-default btn-lg" style="margin-right: 5px;">General &nbsp;
+                    <input type="radio" name="type" value="1" id="general"/>
+                </label>
+                <label for="academic" class="toggleButton btn btn-default btn-lg" style="margin-right: 5px;">Academic &nbsp;
+                    <input type="radio" name="type" value="2" id="academic"/>
+                </label>
+                <label for="personal" class="toggleButton btn btn-default btn-lg" style="margin-right: 5px;">Personal &nbsp;
+                    <input type="radio" name="type" value="3" id="personal"/>
+                </label>
+            </div>
+            <!-- Input fields for front and back of card -->
+            <div class="form-group fieldFront">
+                <label for="front">Front of Card</label>
+                <input type="text" name="front" id="front" class="form-control">
+            </div>
+            <div class="form-group fieldBack">
+                <label for="back">Back of Card</label>
+                <textarea name="back"
+                          class="form-control"
+                          id="back"
+                          placeholder="back of card"
+                          rows="12"></textarea>
+            </div>
+            <!-- Submit button for saving the card -->
+            <div class="form-group">
+                <button type="submit" class="saveButton btn btn-lg btn-primary">Save</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Displaying number of cards -->
+    <div class="page-header">
+        <h2>{{ cards|length }} Card{{ '' if (cards|length == 1) else 's' }}</h2>
+    </div>
+
+    <!-- Filter buttons -->
+    <div class="btn-group btn-group-md" role="group" aria-label="filters">
+        <a href="{{ url_for('filter_cards', filter_name="all") }}" class="btn btn-{{ "primary" if filter_name == "all" else "default" }}" style="margin-right: 5px;">All</a>
+        <a href="{{ url_for('filter_cards', filter_name="general") }}" class="btn btn-{{ "primary" if filter_name == "general" else "default" }}" style="margin-right: 5px;">General</a>
+        <a href="{{ url_for('filter_cards', filter_name="academic") }}" class="btn btn-{{ "primary" if filter_name == "academic" else "default" }}" style="margin-right: 5px;">Academic</a>
+        <a href="{{ url_for('filter_cards', filter_name="personal") }}" class="btn btn-{{ "primary" if filter_name == "personal" else "default" }}" style="margin-right: 5px;">Personal</a>
+        <a href="{{ url_for('filter_cards', filter_name="mastered") }}" class="btn btn-{{ "primary" if filter_name == "mastered" else "default" }}" style="margin-right: 5px;">Mastered</a>
+        <a href="{{ url_for('filter_cards', filter_name="amateur") }}" class="btn btn-{{ "primary" if filter_name == "amateur" else "default" }}" style="margin-right: 5px;">Amateur</a>
+    </div>
+
+    <!-- Table for displaying cards -->
+    <br />
+    <br />
+    <table class="table table-bordered">
+        {% for card in cards %}
+            <tr>
+                <td>
+                    <!-- Button to edit the card -->
+                    <a href="{{ url_for('edit', card_id=card.id) }}" class="btn btn-xs btn-primary"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                </td>
+                <td class="cardContent">
+                    <h4>
+                        {{ card.front }}  <!-- Displaying front of the card -->
+                    </h4>
+                    {% if card.type == 1 %}
+                        {{ card.back|replace("\n", "<br />")|safe }}  <!-- Displaying back of the card -->
+                    {% else %}
+                        <pre><code>{{ card.back|safe }}</code></pre>  <!-- Displaying back of the card with code formatting -->
+                    {% endif %}
+                </td>
+            </tr>
+        {% else %}
+            <!-- Message for no cards available -->
+            <tr>
+                <td>
+                    <em>No cards available for display.</em>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+
+{% endblock %}

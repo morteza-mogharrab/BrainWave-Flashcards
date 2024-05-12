@@ -1,0 +1,3 @@
+SECRET_KEY='Please input a suitable username and a strong, intricate password here.'
+USERNAME='mortezamogharrab'
+PASSWORD='mortezapassword'

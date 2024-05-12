@@ -1,0 +1,107 @@
+/* Styling for highlighted code blocks */
+.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 0.5em;
+  color: #333;
+  background: #f8f8f8;
+}
+
+/* Styling for comments and quotes */
+.hljs-comment,
+.hljs-quote {
+  color: #998;
+  font-style: italic;
+}
+
+/* Styling for keywords, tags, and substitutions */
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-subst {
+  color: #333;
+  font-weight: bold;
+}
+
+/* Styling for numbers, literals, variables, and attributes */
+.hljs-number,
+.hljs-literal,
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag .hljs-attr {
+  color: #00a0c8;
+}
+
+/* Styling for strings and doctags */
+.hljs-string,
+.hljs-doctag {
+  color: #d14;
+}
+
+/* Styling for titles, sections, and selector IDs */
+.hljs-title,
+.hljs-section,
+.hljs-selector-id {
+  color: #900;
+  font-weight: bold;
+}
+
+/* Styling for type, class titles, names, and attributes */
+.hljs-subst {
+  font-weight: normal;
+}
+
+.hljs-type,
+.hljs-class .hljs-title {
+  color: #458;
+  font-weight: bold;
+}
+
+.hljs-tag,
+.hljs-name,
+.hljs-attribute {
+  color: #00a0c8;
+  font-weight: normal;
+}
+
+/* Styling for regexps and links */
+.hljs-regexp,
+.hljs-link {
+  color: #00a0c8;
+}
+
+/* Styling for symbols and bullets */
+.hljs-symbol,
+.hljs-bullet {
+  color: #990073;
+}
+
+/* Styling for built-in and builtin names */
+.hljs-built_in,
+.hljs-builtin-name {
+  color: #FF0000
+}
+
+/* Styling for meta information */
+.hljs-meta {
+  color: #999;
+  font-weight: bold;
+}
+
+/* Styling for deletions and additions */
+.hljs-deletion {
+  background: #fdd;
+}
+
+.hljs-addition {
+  background: #dfd;
+}
+
+/* Styling for emphasis */
+.hljs-emphasis {
+  font-style: italic;
+}
+
+/* Styling for strong emphasis */
+.hljs-strong {
+  font-weight: bold;
+}

@@ -1,0 +1,74 @@
+<!doctype html>
+<html>
+<head>
+    <title>BrainWave Flashcards</title>  <!-- Title of the page -->
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <!-- Custom CSS -->
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}"/>
+    <!-- Syntax highlighting theme CSS -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='hightlight-theme-github.css') }}" />
+    <!-- Background styling -->
+    <style>
+        body {
+            background-image: url('{{ url_for("static", filename="UofA.png") }}');  /* Background image */
+            background-repeat: no-repeat;  /* No repeating of background image */
+            background-size: contain;  /* Contain background image within the body */
+            background-position: center;  /* Center the background image */
+            background-color: #FFFFFF; /* Add a background color if needed */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <br/>
+                <!-- Navigation bar -->
+                <nav class="navbar navbar-default">
+                    <div class="navbar-header">
+                        <!-- Logo -->
+                        <img src="{{ url_for('static', filename='icon.png') }}" alt="Logo" style="float: left; height: 40px; margin-top: 5px; margin-left: 5px;" />
+                        <!-- Brand name -->
+                        <a class="navbar-brand" href="{{ url_for('index') }}">BrainWave Flashcards</a>
+                    </div>
+                    <!-- Right-aligned navigation items -->
+                    <ul class="nav navbar-nav navbar-right">
+                        {% if not session.logged_in %}
+                        <!-- Login link if not logged in -->
+                        <li><a href="{{ url_for('login') }}">Log in</a></li>
+                        {% else %}
+                        <!-- Navigation links if logged in -->
+                        <li><a href="{{ url_for('cards') }}">Cards</a></li>
+                        <li><a href="{{ url_for('general') }}">General</a></li>
+                        <li><a href="{{ url_for('academic') }}">Academic</a></li>
+                        <li><a href="{{ url_for('personal') }}">Personal</a></li>
+                        <li>&nbsp;&nbsp;&nbsp;&nbsp;</li>
+                        <!-- Logout link if logged in -->
+                        <li><a href="{{ url_for('logout') }}">Log out</a></li>
+                        <!-- University logo -->
+                        <li><img src="{{ url_for('static', filename='UofA1.png') }}" alt="Logo" style="height: 40px; margin-top: 5px; margin-right: 5px;"></li>
+                        {% endif %}
+                    </ul>
+                </nav>
+                <!-- Displaying flashed messages -->
+                {% for message in get_flashed_messages() %}
+                <div class="alert alert-success" role="alert">{{ message }}</div>
+                {% endfor %}
+                <!-- Body content block -->
+                {% block body %}{% endblock %}
+            </div>
+        </div>
+    </div>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+    <!-- Bootstrap JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <!-- Font Awesome -->
+    <script src="https://use.fontawesome.com/8cea844162.js"></script>
+    <!-- FastClick JavaScript -->
+    <script src="{{ url_for('static', filename='fastclick.min.js') }}"></script>
+    <!-- Custom JavaScript -->
+    <script src="{{ url_for('static', filename='general.js') }}"></script>
+</body>
+</html>

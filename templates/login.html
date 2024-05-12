@@ -1,0 +1,29 @@
+{% extends "layout.html" %}  <!-- Extending the base layout -->
+
+{% block body %}  <!-- Beginning of body block -->
+    <h2>Login</h2>  <!-- Heading for login section -->
+    {% if error %}
+        <!-- Displaying error message if any -->
+        <div class="alert alert-danger" role="alert">{{ error }}</div>
+    {% endif %}
+
+    <!-- Login form -->
+    <div class="well">
+        <form action="{{ url_for('login') }}" method=post>
+            <!-- Input field for username -->
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" class="form-control">
+            </div>
+            <!-- Input field for password -->
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" class="form-control">
+            </div>
+            <!-- Button to submit login credentials -->
+            <div class="form-group">
+                <button type="submit" class="btn btn-lg btn-primary">Log in</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}

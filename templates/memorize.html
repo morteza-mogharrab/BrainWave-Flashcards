@@ -1,0 +1,99 @@
+{% extends "layout.html" %}  <!-- Extending the base layout -->
+
+{% block body %}  <!-- Beginning of body block -->
+
+    <!-- Row for card type selection buttons -->
+    <div class="row">
+        <div class="col-xs-12 text-center">
+            <div class="btn-group btn-group-lg" role="group" aria-label="card type">
+                <!-- Button to select general card type -->
+                <a href="{{ url_for('general') }}" class="btn btn-{{ "primary" if card_type == "general" else "default" }}">General</a>
+                <!-- Button to select academic card type -->
+                <a href="{{ url_for('academic') }}" class="btn btn-{{ "primary" if card_type == "academic" else "default" }}">Academic</a>
+                <!-- Button to select personal card type -->
+                <a href="{{ url_for('personal') }}" class="btn btn-{{ "primary" if card_type == "personal" else "default" }}">Personal</a>
+            </div>
+        </div>
+    </div>
+
+    <hr/>  <!-- Horizontal line -->
+
+    <!-- Row for memorization panel -->
+    <div class="row memorizePanel">
+        <div class="col-xs-8 col-xs-offset-2">
+            <!-- Front of the card panel -->
+            <div class="panel panel-default cardFront">
+                <div class="panel-body">
+                    <div class="alignContainer">
+                        <div class="alignMiddle frontText">
+                            <!-- Displaying front of the card -->
+                            <h3 class="text-center">{{ card.front }}</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Back of the card panel -->
+            <div class="panel panel-primary cardBack">
+                <div class="panel-body">
+                    <div class="alignContainer">
+                        <div class="alignMiddle frontText">
+                            {% if card.type == 1 %}
+                                {% if short_answer %}
+                                    <div class="text-center largerText">
+                                {% endif %}
+                                    <!-- Displaying back of the card -->
+                                    {{ card.back|replace("\n", "<br />")|safe }}
+                                {% if short_answer %}
+                                    </div>
+                                {% endif %}
+                            {% else %}
+                                <!-- Displaying back of the card with code formatting -->
+                                <pre><code>{{ card.back|safe }}</code></pre>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Row for action buttons -->
+    <div class="row">
+        <div class="col-xs-12 text-center">
+            <!-- Button to flip the card -->
+            <a href="javascript:" class="btn btn-primary btn-lg flipCard">
+                <i class="fa fa-exchange"></i>
+                Turning Card
+            </a>
+            &nbsp;
+            &nbsp;
+            <!-- Button to mark the card as mastered -->
+            <a href="{{ url_for('mark_known', card_id=card.id, card_type=card_type) }}" class="btn btn-success btn-lg">
+                <i class="fa fa-check"></i>
+                Mastered
+            </a>
+            &nbsp;
+            &nbsp;
+            <!-- Button to move to the next card -->
+            <a href="{{ url_for(card_type) }}" class="btn btn-info btn-lg">
+                Next Card
+                <i class="fa fa-arrow-right"></i>
+            </a>
+        </div>
+    </div>
+
+    <!-- Row for bookmarking the card -->
+    <div class="row">
+        <div class="col-xs-12 text-center">
+            <br />
+            <br />
+            <br />
+            <!-- Button to bookmark the card -->
+            <a href="{{ url_for(card_type, card_id=card.id) }}" class="btn btn-default btn-sm">
+                <i class="fa fa-bookmark"></i>
+                bookmark this card (#{{ card.id }})
+            </a>
+        </div>
+    </div>
+
+{% endblock %}
